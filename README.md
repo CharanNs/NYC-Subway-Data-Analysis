@@ -7,7 +7,7 @@ The notebook can be found here and the requested version in HTML can be found he
 All files containing the data consumed or generated during project execution can be found in the data directory.
 
 
-# References used:
+# References :
     # Documentations:
         Pandas
             https://pandas.pydata.org/pandas-docs/stable/
