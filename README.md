@@ -1,9 +1,6 @@
 # NYC-Subway-Data-Analysis
 Project of the Nanodegree Program "Big Data Foundations", Udacity.
-
-
-The notebook can be found here and the requested version in HTML can be found here.
-
+The Jupyter file and the html file have been attached here.
 All files containing the data consumed or generated during project execution can be found in the data directory.
 
 
