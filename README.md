@@ -1,8 +1,22 @@
 # NYC-Subway-Data-Analysis
 Project of the Nanodegree Program "Big Data Foundations", Udacity.
 The Jupyter file and the html file have been attached here.
-All files containing the data consumed or generated during project execution can be found in the data directory.
+All files containing the data consumed or generated during project execution can be found in the dataset directory.
 
+# Project Overview
+In this Project, i look at NYC Subway Data to find out whether more people ride the subway when it’s raining versus when it’s not.
+
+I will compare New York City Subway data, use statistical methods and data visualization to draw an interesting conclusion about the subway with the dataset that i have analyzed.
+
+# What did i learn?
+I've been exposed to and learn fundamental Data Science skills, such as:
+    Dispute Data
+    Applied Statistics and Machine Learning
+    MapReduce
+    
+# Key Software used
+    Anaconda
+    Jupyter
 
 # References :
     # Documentations:
