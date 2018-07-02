@@ -1,0 +1,1837 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Analyzing\_Subway\_Data\_NDFDSI}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Subway Data Analysis}\label{subway-data-analysis}
+
+\subsection{Introduction}\label{introduction}
+
+The NYC public transportantion system - Metro Transit Authority -
+provides data for download via csv files. Part of the information
+available are data from the subway turnstiles, containing weekly logs
+for cumulative entries and exits by turnstile and by subway station
+during a provided timeframe.
+
+For this project, we will only use the information available at:
+http://web.mta.info/developers/turnstile.html.
+
+    \section{About this project}\label{about-this-project}
+
+For this project, you will apply the knowledge acquired in the first
+month of this course. We will practice basic data acquisition and data
+cleaning tasks to find out fundamental stuff about the data using what
+we learned in the Statistics course.
+
+The goal of this project is to explore the relationship between data
+from the NYC Subway turnstiles and the city weather. For this, besides
+data from the subway, we will also need data from the weather in NYC.
+
+Here are the main points that will be considered in this work:
+
+\begin{itemize}
+\tightlist
+\item
+  Gathering data from the Internet
+\item
+  Using Statistics for Data Analysis
+\item
+  Data handling and simple graphics creation with \texttt{Pandas}
+\end{itemize}
+
+\emph{How to find help}: We suggest that you try the following channels,
+in the following order:
+
+\begin{longtable}[]{@{}lllll@{}}
+\toprule
+Type of Question\Channels & Google & Forum & Slack &
+Email\tabularnewline
+\midrule
+\endhead
+Pandas and Python Programming & 1 & 2 & 3 &\tabularnewline
+Projects Requiriments & & 1 & 2 & 3\tabularnewline
+Projects Specific Parts & & 1 & 2 & 3\tabularnewline
+\bottomrule
+\end{longtable}
+
+Here is the address for each of these channels:
+
+\begin{itemize}
+\tightlist
+\item
+  Forum: https://discussions.udacity.com/c/ndfdsi-project
+\item
+  Slack: \href{https://goo.gl/4K7LWK}{Big Data Foundations}
+\item
+  Email: india@udacity.com
+\end{itemize}
+
+\textbf{The student is expected to submit this report including:}
+
+\begin{itemize}
+\tightlist
+\item
+  All TODO's completed, as they are crucial for the code to run
+  accordingly
+\item
+  The ipynb file, exported as html
+\end{itemize}
+
+To submit this project, go to the
+\href{https://coco.udacity.com/nanodegrees/nd100-inbig/locale/en-us/versions/1.0.0/parts/469348/modules/469702/lessons/469703/project}{classroom},
+and submit your zipped \texttt{.ipynb} and html.
+
+    \section{Reminders}\label{reminders}
+
+Before we start, there are a few things you must have in mind while
+using iPython notebooks:
+
+\begin{itemize}
+\tightlist
+\item
+  Remember you can see, in the left side of a code cell, when was the
+  last time it ran, if there is a number inside the keys.
+\item
+  When starting a new session in the notebook, please make sure to run
+  all cells up to the point where you last left it. Even if the output
+  can still be viewed from the moment you ran your cells in the previews
+  session, the kernel starts in a new state, so you will need to reload
+  all data, etc. in a new session.
+\item
+  The previous point is useful to have in mind if your answers do not
+  match what is expected from the quizzes in the classroom. Try
+  reloading the data and running all processing steps, one by one, to
+  make sure you're working with the same variables and data from each
+  step of the quizz.
+\end{itemize}
+
+    \subsection{Session 1 - Data
+Gathering}\label{session-1---data-gathering}
+
+\subsubsection{\texorpdfstring{\emph{Exercise
+1.1}}{Exercise 1.1}}\label{exercise-1.1}
+
+Let's do it!! Now it's your turn to gather data. Please write bellow a
+Python code to access the link
+http://web.mta.info/developers/turnstile.html and download all files
+from June 2017. The file must be named turnstile\_100617.txt, where
+10/06/17 is the file's date.
+
+Please see below a few commands that might help you:
+
+Use the \textbf{urllib} library to open and redeem a webpage. Use the
+command below, where \textbf{url} is the webpage path to the following
+file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{u }\OperatorTok{=}\NormalTok{ urllib.urlopen(url)}
+\NormalTok{html }\OperatorTok{=}\NormalTok{ u.read()}
+\end{Highlighting}
+\end{Shaded}
+
+Use the \textbf{BeautifulSoup} library to search for the link to the
+file you want to donwload in the page. Use the command below to create
+your \emph{soup} object and search for all 'a' tags in the document:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{soup }\OperatorTok{=}\NormalTok{ BeautifulSoup(html, }\StringTok{"html.parser"}\NormalTok{)}
+\NormalTok{links }\OperatorTok{=}\NormalTok{ soup.find_all(}\StringTok{'a'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+A tip to only download the files from June is to check data in the name
+of the file. For instance, to donwload the 17/06/2017 file, please see
+if the link ends with \emph{"turnstile\_170610.txt"}. If you forget to
+do this, you will download all files from that page. In order to do
+this, you can use the following command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if} \StringTok{'1706'} \KeywordTok{in}\NormalTok{ link.get(}\StringTok{'href'}\NormalTok{):}
+\end{Highlighting}
+\end{Shaded}
+
+Our final tip is to use the command bellow to download the txt file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{urllib.urlretrieve(link_do_arquivo, filename)}
+\end{Highlighting}
+\end{Shaded}
+
+Please remember - you first have to load all packages and functions that
+will be used in your analysys.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{urllib}\PY{n+nn}{.}\PY{n+nn}{request} \PY{k}{import} \PY{n}{urlopen}\PY{p}{,} \PY{n}{urlretrieve}
+         \PY{k+kn}{from} \PY{n+nn}{bs4} \PY{k}{import} \PY{n}{BeautifulSoup}
+         \PY{n}{base\PYZus{}path} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{http://web.mta.info/developers/}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{url} \PY{o}{=} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}base\PYZus{}path\PYZcb{}}\PY{l+s+s2}{turnstile.html/}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{u} \PY{o}{=} \PY{n}{urlopen}\PY{p}{(}\PY{n}{url}\PY{p}{)}
+         \PY{n}{html} \PY{o}{=} \PY{n}{u}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+         \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{html}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{html.parser}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{container} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{div}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{\PYZob{}} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{container}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{links} \PY{o}{=} \PY{n}{container}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{link} \PY{o+ow}{in} \PY{n}{links}\PY{p}{:}
+             \PY{n}{partial\PYZus{}path} \PY{o}{=} \PY{n}{link}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{href}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1706}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{partial\PYZus{}path}\PY{p}{:}
+                 \PY{n}{full\PYZus{}path} \PY{o}{=} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}base\PYZus{}path\PYZcb{}}\PY{l+s+si}{\PYZob{}partial\PYZus{}path\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+                 \PY{n}{filename} \PY{o}{=} \PY{n}{partial\PYZus{}path}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{urlretrieve}\PY{p}{(}\PY{n}{full\PYZus{}path}\PY{p}{,} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dataset/}\PY{l+s+si}{\PYZob{}filename\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{\texorpdfstring{\emph{Exercise
+1.2}}{Exercise 1.2}}\label{exercise-1.2}
+
+Write down a function that takes the list of all names of the files you
+downloaded in Exercise 1.1 and compile them into one single file. There
+must be only one header line in the output file.
+
+For example, if file\_1 has: line 1... line 2...
+
+and the other file, file\_2, has: line 3... line 4... line 5...
+
+We must combine file\_1 and file\_2 into one master file, as follows:
+
+'C/A, UNIT, SCP, DATEn, TIMEn, DESCn, ENTRIESn, EXITSn' line 1... line
+2... line 3... line 4... line 5...
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{create\PYZus{}master\PYZus{}turnstile\PYZus{}file}\PY{p}{(}\PY{n}{filenames}\PY{p}{,} \PY{n}{output\PYZus{}file}\PY{p}{)}\PY{p}{:}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{output\PYZus{}file}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{master\PYZus{}file}\PY{p}{:}
+                 \PY{n}{master\PYZus{}file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C/A,UNIT,SCP,STATION, LINENAME, DIVISION, DATEn,TIMEn,DESCn,ENTRIESn,EXITSn}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{filename} \PY{o+ow}{in} \PY{n}{filenames}\PY{p}{:}
+                     \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{)} \PY{k}{as} \PY{n}{partial\PYZus{}file}\PY{p}{:}
+                         \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{partial\PYZus{}file}\PY{p}{:}
+                             \PY{n}{master\PYZus{}file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{line}\PY{p}{)}
+         \PY{n}{days} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{03}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{17}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{filenames} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{days}\PY{p}{:}
+             \PY{n}{filenames}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dataset/turnstile\PYZus{}1706}\PY{l+s+si}{\PYZob{}d\PYZcb{}}\PY{l+s+s2}{.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{create\PYZus{}master\PYZus{}turnstile\PYZus{}file}\PY{p}{(}\PY{n}{filenames}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dataset/june2017.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{\texorpdfstring{\emph{Exercise
+1.3}}{Exercise 1.3}}\label{exercise-1.3}
+
+For this exercise, you will write a function that reads the master\_file
+created in the previous exercise and load it into a Pandas Dataframe.
+This function can be filtered, so that the Dataframe only has lines
+where column "DESCn" has the value "Regular".
+
+For example, if the Pandas Dataframe looks like this:
+
+\begin{verbatim}
+,C/A,UNIT,SCP,DATEn,TIMEn,DESCn,ENTRIESn,EXITSn
+0,A002,R051,02-00-00,05-01-11,00:00:00,REGULAR,3144312,1088151
+1,A002,R051,02-00-00,05-01-11,04:00:00,DOOR,3144335,1088159
+2,A002,R051,02-00-00,05-01-11,08:00:00,REGULAR,3144353,1088177
+3,A002,R051,02-00-00,05-01-11,12:00:00,DOOR,3144424,1088231
+\end{verbatim}
+
+The Dataframe must look like the following, after filtering only the
+lines where column DESCn has the value REGULAR:
+
+\begin{verbatim}
+0,A002,R051,02-00-00,05-01-11,00:00:00,REGULAR,3144312,1088151
+2,A002,R051,02-00-00,05-01-11,08:00:00,REGULAR,3144353,1088177
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k+kn}{import} \PY{n+nn}{pandas}
+         \PY{k}{def} \PY{n+nf}{filter\PYZus{}by\PYZus{}regular}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+             \PY{n}{turnstile\PYZus{}data} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{object}\PY{p}{)}
+             \PY{n}{turnstile\PYZus{}data} \PY{o}{=} \PY{n}{turnstile\PYZus{}data}\PY{p}{[}\PY{n}{turnstile\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DESCn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{REGULAR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{k}{return} \PY{n}{turnstile\PYZus{}data}
+         \PY{n}{filter\PYZus{}by\PYZus{}regular}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dataset/june2017.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}           C/A  UNIT       SCP        STATION  LINENAME  DIVISION       DATEn  \textbackslash{}
+         1        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         2        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         3        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         4        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         5        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         6        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         7        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         8        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         9        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         10       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         11       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         12       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         13       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         14       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         15       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         16       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         17       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         18       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         19       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         20       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         21       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         22       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         23       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         24       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         25       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         26       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         27       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         28       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         29       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         30       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         {\ldots}       {\ldots}   {\ldots}       {\ldots}            {\ldots}       {\ldots}       {\ldots}         {\ldots}   
+         788188  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788189  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788190  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788191  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788192  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788193  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788194  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788195  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788196  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788197  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788198  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788199  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788200  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788201  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788202  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788203  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788204  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788205  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788206  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788207  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788208  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788209  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788210  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788211  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788212  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788213  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788214  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788215  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788216  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788217  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         
+                    TIMEn    DESCn    ENTRIESn  \textbackslash{}
+         1       00:00:00  REGULAR  0006195217   
+         2       04:00:00  REGULAR  0006195240   
+         3       08:00:00  REGULAR  0006195256   
+         4       12:00:00  REGULAR  0006195346   
+         5       16:00:00  REGULAR  0006195518   
+         6       20:00:00  REGULAR  0006195765   
+         7       00:00:00  REGULAR  0006195898   
+         8       04:00:00  REGULAR  0006195914   
+         9       08:00:00  REGULAR  0006195930   
+         10      12:00:00  REGULAR  0006196024   
+         11      16:00:00  REGULAR  0006196186   
+         12      20:00:00  REGULAR  0006196446   
+         13      00:00:00  REGULAR  0006196569   
+         14      04:00:00  REGULAR  0006196587   
+         15      08:00:00  REGULAR  0006196597   
+         16      12:00:00  REGULAR  0006196666   
+         17      16:00:00  REGULAR  0006196853   
+         18      20:00:00  REGULAR  0006197107   
+         19      00:00:00  REGULAR  0006197230   
+         20      04:00:00  REGULAR  0006197238   
+         21      08:00:00  REGULAR  0006197288   
+         22      12:00:00  REGULAR  0006197470   
+         23      16:00:00  REGULAR  0006197790   
+         24      20:00:00  REGULAR  0006198624   
+         25      00:00:00  REGULAR  0006198819   
+         26      04:00:00  REGULAR  0006198834   
+         27      08:00:00  REGULAR  0006198880   
+         28      12:00:00  REGULAR  0006199053   
+         29      16:00:00  REGULAR  0006199379   
+         30      20:00:00  REGULAR  0006200200   
+         {\ldots}          {\ldots}      {\ldots}         {\ldots}   
+         788188  01:00:00  REGULAR  0000005554   
+         788189  05:00:00  REGULAR  0000005554   
+         788190  09:00:00  REGULAR  0000005554   
+         788191  13:00:00  REGULAR  0000005554   
+         788192  17:00:00  REGULAR  0000005554   
+         788193  21:00:00  REGULAR  0000005554   
+         788194  01:00:00  REGULAR  0000005554   
+         788195  05:00:00  REGULAR  0000005554   
+         788196  09:00:00  REGULAR  0000005554   
+         788197  13:00:00  REGULAR  0000005554   
+         788198  17:00:00  REGULAR  0000005554   
+         788199  21:00:00  REGULAR  0000005554   
+         788200  01:00:00  REGULAR  0000005554   
+         788201  05:00:00  REGULAR  0000005554   
+         788202  09:00:00  REGULAR  0000005554   
+         788203  13:00:00  REGULAR  0000005554   
+         788204  17:00:00  REGULAR  0000005554   
+         788205  21:00:00  REGULAR  0000005554   
+         788206  01:00:00  REGULAR  0000005554   
+         788207  05:00:00  REGULAR  0000005554   
+         788208  09:00:00  REGULAR  0000005554   
+         788209  13:00:00  REGULAR  0000005554   
+         788210  17:00:00  REGULAR  0000005554   
+         788211  21:00:00  REGULAR  0000005554   
+         788212  01:00:00  REGULAR  0000005554   
+         788213  05:00:00  REGULAR  0000005554   
+         788214  09:00:00  REGULAR  0000005554   
+         788215  13:00:00  REGULAR  0000005554   
+         788216  17:00:00  REGULAR  0000005554   
+         788217  21:00:00  REGULAR  0000005554   
+         
+                                                            EXITSn  
+         1       0002098317                                    {\ldots}  
+         2       0002098318                                    {\ldots}  
+         3       0002098347                                    {\ldots}  
+         4       0002098432                                    {\ldots}  
+         5       0002098491                                    {\ldots}  
+         6       0002098537                                    {\ldots}  
+         7       0002098559                                    {\ldots}  
+         8       0002098562                                    {\ldots}  
+         9       0002098581                                    {\ldots}  
+         10      0002098646                                    {\ldots}  
+         11      0002098685                                    {\ldots}  
+         12      0002098723                                    {\ldots}  
+         13      0002098745                                    {\ldots}  
+         14      0002098747                                    {\ldots}  
+         15      0002098766                                    {\ldots}  
+         16      0002098845                                    {\ldots}  
+         17      0002098891                                    {\ldots}  
+         18      0002098922                                    {\ldots}  
+         19      0002098946                                    {\ldots}  
+         20      0002098949                                    {\ldots}  
+         21      0002099066                                    {\ldots}  
+         22      0002099345                                    {\ldots}  
+         23      0002099442                                    {\ldots}  
+         24      0002099521                                    {\ldots}  
+         25      0002099552                                    {\ldots}  
+         26      0002099555                                    {\ldots}  
+         27      0002099671                                    {\ldots}  
+         28      0002099950                                    {\ldots}  
+         29      0002100021                                    {\ldots}  
+         30      0002100072                                    {\ldots}  
+         {\ldots}                                                   {\ldots}  
+         788188  0000000301                                    {\ldots}  
+         788189  0000000301                                    {\ldots}  
+         788190  0000000301                                    {\ldots}  
+         788191  0000000301                                    {\ldots}  
+         788192  0000000301                                    {\ldots}  
+         788193  0000000301                                    {\ldots}  
+         788194  0000000301                                    {\ldots}  
+         788195  0000000301                                    {\ldots}  
+         788196  0000000301                                    {\ldots}  
+         788197  0000000301                                    {\ldots}  
+         788198  0000000301                                    {\ldots}  
+         788199  0000000301                                    {\ldots}  
+         788200  0000000301                                    {\ldots}  
+         788201  0000000301                                    {\ldots}  
+         788202  0000000301                                    {\ldots}  
+         788203  0000000301                                    {\ldots}  
+         788204  0000000301                                    {\ldots}  
+         788205  0000000301                                    {\ldots}  
+         788206  0000000301                                    {\ldots}  
+         788207  0000000301                                    {\ldots}  
+         788208  0000000301                                    {\ldots}  
+         788209  0000000301                                    {\ldots}  
+         788210  0000000301                                    {\ldots}  
+         788211  0000000301                                    {\ldots}  
+         788212  0000000301                                    {\ldots}  
+         788213  0000000301                                    {\ldots}  
+         788214  0000000301                                    {\ldots}  
+         788215  0000000301                                    {\ldots}  
+         788216  0000000301                                    {\ldots}  
+         788217  0000000301                                    {\ldots}  
+         
+         [785406 rows x 11 columns]
+\end{Verbatim}
+            
+    \subsubsection{\texorpdfstring{\emph{Exercise
+1.4}}{Exercise 1.4}}\label{exercise-1.4}
+
+The NYC Subway data has cumulative entry and exit data in each line.
+Let's assume you have a Dataframe called df, which contains only lines
+for one particular turnstile (unique SCP, C/A, and UNIT). The following
+function must change these cumulative entries for counting all entries
+since the last reading (entries from the last line of the Dataframe).
+
+More specifically, there are two things you should do:
+
+1 - Create a new column, called ENTRIESn\_hourly 2 - Insert in this
+column the difference between ENTRIESn in the current and the previous
+column. If the line has any NAN, fill it out/replace by 1.
+
+Tip: The funtions shift() and fillna() in Pandas might be usefull for
+this exercise.
+
+Below you will find and example of how your Dataframe should look by the
+end of this exercise:
+
+\begin{verbatim}
+    C/A  UNIT       SCP     DATEn     TIMEn    DESCn  ENTRIESn    EXITSn  ENTRIESn_hourly
+0     A002  R051  02-00-00  05-01-11  00:00:00  REGULAR   3144312   1088151                1
+1     A002  R051  02-00-00  05-01-11  04:00:00  REGULAR   3144335   1088159               23
+2     A002  R051  02-00-00  05-01-11  08:00:00  REGULAR   3144353   1088177               18
+3     A002  R051  02-00-00  05-01-11  12:00:00  REGULAR   3144424   1088231               71
+4     A002  R051  02-00-00  05-01-11  16:00:00  REGULAR   3144594   1088275              170
+5     A002  R051  02-00-00  05-01-11  20:00:00  REGULAR   3144808   1088317              214
+6     A002  R051  02-00-00  05-02-11  00:00:00  REGULAR   3144895   1088328               87
+7     A002  R051  02-00-00  05-02-11  04:00:00  REGULAR   3144905   1088331               10
+8     A002  R051  02-00-00  05-02-11  08:00:00  REGULAR   3144941   1088420               36
+9     A002  R051  02-00-00  05-02-11  12:00:00  REGULAR   3145094   1088753              153
+10    A002  R051  02-00-00  05-02-11  16:00:00  REGULAR   3145337   1088823              243
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k+kn}{import} \PY{n+nn}{pandas}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}hourly\PYZus{}entries}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+             \PY{n}{diff} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ENTRIESn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{pandas}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ENTRIESn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ENTRIESn\PYZus{}hourly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{diff}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+             \PY{k}{return} \PY{n}{df}
+         \PY{n}{df} \PY{o}{=} \PY{n}{filter\PYZus{}by\PYZus{}regular}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dataset/june2017.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{get\PYZus{}hourly\PYZus{}entries}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}           C/A  UNIT       SCP        STATION  LINENAME  DIVISION       DATEn  \textbackslash{}
+         1        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         2        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         3        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         4        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         5        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         6        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         7        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         8        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         9        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         10       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         11       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         12       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         13       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         14       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         15       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         16       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         17       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         18       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         19       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         20       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         21       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         22       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         23       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         24       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         25       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         26       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         27       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         28       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         29       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         30       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         {\ldots}       {\ldots}   {\ldots}       {\ldots}            {\ldots}       {\ldots}       {\ldots}         {\ldots}   
+         788188  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788189  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788190  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788191  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788192  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788193  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788194  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788195  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788196  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788197  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788198  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788199  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788200  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788201  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788202  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788203  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788204  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788205  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788206  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788207  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788208  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788209  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788210  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788211  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788212  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788213  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788214  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788215  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788216  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788217  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         
+                    TIMEn    DESCn    ENTRIESn  \textbackslash{}
+         1       00:00:00  REGULAR  0006195217   
+         2       04:00:00  REGULAR  0006195240   
+         3       08:00:00  REGULAR  0006195256   
+         4       12:00:00  REGULAR  0006195346   
+         5       16:00:00  REGULAR  0006195518   
+         6       20:00:00  REGULAR  0006195765   
+         7       00:00:00  REGULAR  0006195898   
+         8       04:00:00  REGULAR  0006195914   
+         9       08:00:00  REGULAR  0006195930   
+         10      12:00:00  REGULAR  0006196024   
+         11      16:00:00  REGULAR  0006196186   
+         12      20:00:00  REGULAR  0006196446   
+         13      00:00:00  REGULAR  0006196569   
+         14      04:00:00  REGULAR  0006196587   
+         15      08:00:00  REGULAR  0006196597   
+         16      12:00:00  REGULAR  0006196666   
+         17      16:00:00  REGULAR  0006196853   
+         18      20:00:00  REGULAR  0006197107   
+         19      00:00:00  REGULAR  0006197230   
+         20      04:00:00  REGULAR  0006197238   
+         21      08:00:00  REGULAR  0006197288   
+         22      12:00:00  REGULAR  0006197470   
+         23      16:00:00  REGULAR  0006197790   
+         24      20:00:00  REGULAR  0006198624   
+         25      00:00:00  REGULAR  0006198819   
+         26      04:00:00  REGULAR  0006198834   
+         27      08:00:00  REGULAR  0006198880   
+         28      12:00:00  REGULAR  0006199053   
+         29      16:00:00  REGULAR  0006199379   
+         30      20:00:00  REGULAR  0006200200   
+         {\ldots}          {\ldots}      {\ldots}         {\ldots}   
+         788188  01:00:00  REGULAR  0000005554   
+         788189  05:00:00  REGULAR  0000005554   
+         788190  09:00:00  REGULAR  0000005554   
+         788191  13:00:00  REGULAR  0000005554   
+         788192  17:00:00  REGULAR  0000005554   
+         788193  21:00:00  REGULAR  0000005554   
+         788194  01:00:00  REGULAR  0000005554   
+         788195  05:00:00  REGULAR  0000005554   
+         788196  09:00:00  REGULAR  0000005554   
+         788197  13:00:00  REGULAR  0000005554   
+         788198  17:00:00  REGULAR  0000005554   
+         788199  21:00:00  REGULAR  0000005554   
+         788200  01:00:00  REGULAR  0000005554   
+         788201  05:00:00  REGULAR  0000005554   
+         788202  09:00:00  REGULAR  0000005554   
+         788203  13:00:00  REGULAR  0000005554   
+         788204  17:00:00  REGULAR  0000005554   
+         788205  21:00:00  REGULAR  0000005554   
+         788206  01:00:00  REGULAR  0000005554   
+         788207  05:00:00  REGULAR  0000005554   
+         788208  09:00:00  REGULAR  0000005554   
+         788209  13:00:00  REGULAR  0000005554   
+         788210  17:00:00  REGULAR  0000005554   
+         788211  21:00:00  REGULAR  0000005554   
+         788212  01:00:00  REGULAR  0000005554   
+         788213  05:00:00  REGULAR  0000005554   
+         788214  09:00:00  REGULAR  0000005554   
+         788215  13:00:00  REGULAR  0000005554   
+         788216  17:00:00  REGULAR  0000005554   
+         788217  21:00:00  REGULAR  0000005554   
+         
+                                                            EXITSn  ENTRIESn\_hourly  
+         1       0002098317                                    {\ldots}                1  
+         2       0002098318                                    {\ldots}               23  
+         3       0002098347                                    {\ldots}               16  
+         4       0002098432                                    {\ldots}               90  
+         5       0002098491                                    {\ldots}              172  
+         6       0002098537                                    {\ldots}              247  
+         7       0002098559                                    {\ldots}              133  
+         8       0002098562                                    {\ldots}               16  
+         9       0002098581                                    {\ldots}               16  
+         10      0002098646                                    {\ldots}               94  
+         11      0002098685                                    {\ldots}              162  
+         12      0002098723                                    {\ldots}              260  
+         13      0002098745                                    {\ldots}              123  
+         14      0002098747                                    {\ldots}               18  
+         15      0002098766                                    {\ldots}               10  
+         16      0002098845                                    {\ldots}               69  
+         17      0002098891                                    {\ldots}              187  
+         18      0002098922                                    {\ldots}              254  
+         19      0002098946                                    {\ldots}              123  
+         20      0002098949                                    {\ldots}                8  
+         21      0002099066                                    {\ldots}               50  
+         22      0002099345                                    {\ldots}              182  
+         23      0002099442                                    {\ldots}              320  
+         24      0002099521                                    {\ldots}              834  
+         25      0002099552                                    {\ldots}              195  
+         26      0002099555                                    {\ldots}               15  
+         27      0002099671                                    {\ldots}               46  
+         28      0002099950                                    {\ldots}              173  
+         29      0002100021                                    {\ldots}              326  
+         30      0002100072                                    {\ldots}              821  
+         {\ldots}                                                   {\ldots}              {\ldots}  
+         788188  0000000301                                    {\ldots}                0  
+         788189  0000000301                                    {\ldots}                0  
+         788190  0000000301                                    {\ldots}                0  
+         788191  0000000301                                    {\ldots}                0  
+         788192  0000000301                                    {\ldots}                0  
+         788193  0000000301                                    {\ldots}                0  
+         788194  0000000301                                    {\ldots}                0  
+         788195  0000000301                                    {\ldots}                0  
+         788196  0000000301                                    {\ldots}                0  
+         788197  0000000301                                    {\ldots}                0  
+         788198  0000000301                                    {\ldots}                0  
+         788199  0000000301                                    {\ldots}                0  
+         788200  0000000301                                    {\ldots}                0  
+         788201  0000000301                                    {\ldots}                0  
+         788202  0000000301                                    {\ldots}                0  
+         788203  0000000301                                    {\ldots}                0  
+         788204  0000000301                                    {\ldots}                0  
+         788205  0000000301                                    {\ldots}                0  
+         788206  0000000301                                    {\ldots}                0  
+         788207  0000000301                                    {\ldots}                0  
+         788208  0000000301                                    {\ldots}                0  
+         788209  0000000301                                    {\ldots}                0  
+         788210  0000000301                                    {\ldots}                0  
+         788211  0000000301                                    {\ldots}                0  
+         788212  0000000301                                    {\ldots}                0  
+         788213  0000000301                                    {\ldots}                0  
+         788214  0000000301                                    {\ldots}                0  
+         788215  0000000301                                    {\ldots}                0  
+         788216  0000000301                                    {\ldots}                0  
+         788217  0000000301                                    {\ldots}                0  
+         
+         [785406 rows x 12 columns]
+\end{Verbatim}
+            
+    \subsubsection{\texorpdfstring{\emph{Exercise
+1.5}}{Exercise 1.5}}\label{exercise-1.5}
+
+Do the same thing you did in the previous exercise, but taking into
+account the exits, column EXITSn. For this, you need to create a column
+called EXITSn\_hourly and insert the difference between the column
+EXITSn in the current line vs he previous line. If there is any NaN,
+fill it out/replace by 0.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k+kn}{import} \PY{n+nn}{pandas}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}hourly\PYZus{}exits}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+             \PY{n}{diff} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EXITSn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{pandas}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EXITSn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EXITSn\PYZus{}hourly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{diff}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+             \PY{k}{return} \PY{n}{df}
+         \PY{n}{get\PYZus{}hourly\PYZus{}exits}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}           C/A  UNIT       SCP        STATION  LINENAME  DIVISION       DATEn  \textbackslash{}
+         1        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         2        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         3        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         4        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         5        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         6        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         7        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         8        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         9        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         10       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         11       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         12       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         13       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         14       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         15       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         16       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         17       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         18       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         19       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         20       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         21       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         22       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         23       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         24       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         25       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         26       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         27       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         28       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         29       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         30       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         {\ldots}       {\ldots}   {\ldots}       {\ldots}            {\ldots}       {\ldots}       {\ldots}         {\ldots}   
+         788188  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788189  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788190  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788191  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788192  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788193  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788194  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788195  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788196  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788197  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788198  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788199  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788200  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788201  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788202  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788203  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788204  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788205  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788206  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788207  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788208  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788209  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788210  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788211  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788212  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788213  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788214  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788215  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788216  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788217  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         
+                    TIMEn    DESCn    ENTRIESn  \textbackslash{}
+         1       00:00:00  REGULAR  0006195217   
+         2       04:00:00  REGULAR  0006195240   
+         3       08:00:00  REGULAR  0006195256   
+         4       12:00:00  REGULAR  0006195346   
+         5       16:00:00  REGULAR  0006195518   
+         6       20:00:00  REGULAR  0006195765   
+         7       00:00:00  REGULAR  0006195898   
+         8       04:00:00  REGULAR  0006195914   
+         9       08:00:00  REGULAR  0006195930   
+         10      12:00:00  REGULAR  0006196024   
+         11      16:00:00  REGULAR  0006196186   
+         12      20:00:00  REGULAR  0006196446   
+         13      00:00:00  REGULAR  0006196569   
+         14      04:00:00  REGULAR  0006196587   
+         15      08:00:00  REGULAR  0006196597   
+         16      12:00:00  REGULAR  0006196666   
+         17      16:00:00  REGULAR  0006196853   
+         18      20:00:00  REGULAR  0006197107   
+         19      00:00:00  REGULAR  0006197230   
+         20      04:00:00  REGULAR  0006197238   
+         21      08:00:00  REGULAR  0006197288   
+         22      12:00:00  REGULAR  0006197470   
+         23      16:00:00  REGULAR  0006197790   
+         24      20:00:00  REGULAR  0006198624   
+         25      00:00:00  REGULAR  0006198819   
+         26      04:00:00  REGULAR  0006198834   
+         27      08:00:00  REGULAR  0006198880   
+         28      12:00:00  REGULAR  0006199053   
+         29      16:00:00  REGULAR  0006199379   
+         30      20:00:00  REGULAR  0006200200   
+         {\ldots}          {\ldots}      {\ldots}         {\ldots}   
+         788188  01:00:00  REGULAR  0000005554   
+         788189  05:00:00  REGULAR  0000005554   
+         788190  09:00:00  REGULAR  0000005554   
+         788191  13:00:00  REGULAR  0000005554   
+         788192  17:00:00  REGULAR  0000005554   
+         788193  21:00:00  REGULAR  0000005554   
+         788194  01:00:00  REGULAR  0000005554   
+         788195  05:00:00  REGULAR  0000005554   
+         788196  09:00:00  REGULAR  0000005554   
+         788197  13:00:00  REGULAR  0000005554   
+         788198  17:00:00  REGULAR  0000005554   
+         788199  21:00:00  REGULAR  0000005554   
+         788200  01:00:00  REGULAR  0000005554   
+         788201  05:00:00  REGULAR  0000005554   
+         788202  09:00:00  REGULAR  0000005554   
+         788203  13:00:00  REGULAR  0000005554   
+         788204  17:00:00  REGULAR  0000005554   
+         788205  21:00:00  REGULAR  0000005554   
+         788206  01:00:00  REGULAR  0000005554   
+         788207  05:00:00  REGULAR  0000005554   
+         788208  09:00:00  REGULAR  0000005554   
+         788209  13:00:00  REGULAR  0000005554   
+         788210  17:00:00  REGULAR  0000005554   
+         788211  21:00:00  REGULAR  0000005554   
+         788212  01:00:00  REGULAR  0000005554   
+         788213  05:00:00  REGULAR  0000005554   
+         788214  09:00:00  REGULAR  0000005554   
+         788215  13:00:00  REGULAR  0000005554   
+         788216  17:00:00  REGULAR  0000005554   
+         788217  21:00:00  REGULAR  0000005554   
+         
+                                                            EXITSn  ENTRIESn\_hourly  \textbackslash{}
+         1       0002098317                                    {\ldots}                1   
+         2       0002098318                                    {\ldots}               23   
+         3       0002098347                                    {\ldots}               16   
+         4       0002098432                                    {\ldots}               90   
+         5       0002098491                                    {\ldots}              172   
+         6       0002098537                                    {\ldots}              247   
+         7       0002098559                                    {\ldots}              133   
+         8       0002098562                                    {\ldots}               16   
+         9       0002098581                                    {\ldots}               16   
+         10      0002098646                                    {\ldots}               94   
+         11      0002098685                                    {\ldots}              162   
+         12      0002098723                                    {\ldots}              260   
+         13      0002098745                                    {\ldots}              123   
+         14      0002098747                                    {\ldots}               18   
+         15      0002098766                                    {\ldots}               10   
+         16      0002098845                                    {\ldots}               69   
+         17      0002098891                                    {\ldots}              187   
+         18      0002098922                                    {\ldots}              254   
+         19      0002098946                                    {\ldots}              123   
+         20      0002098949                                    {\ldots}                8   
+         21      0002099066                                    {\ldots}               50   
+         22      0002099345                                    {\ldots}              182   
+         23      0002099442                                    {\ldots}              320   
+         24      0002099521                                    {\ldots}              834   
+         25      0002099552                                    {\ldots}              195   
+         26      0002099555                                    {\ldots}               15   
+         27      0002099671                                    {\ldots}               46   
+         28      0002099950                                    {\ldots}              173   
+         29      0002100021                                    {\ldots}              326   
+         30      0002100072                                    {\ldots}              821   
+         {\ldots}                                                   {\ldots}              {\ldots}   
+         788188  0000000301                                    {\ldots}                0   
+         788189  0000000301                                    {\ldots}                0   
+         788190  0000000301                                    {\ldots}                0   
+         788191  0000000301                                    {\ldots}                0   
+         788192  0000000301                                    {\ldots}                0   
+         788193  0000000301                                    {\ldots}                0   
+         788194  0000000301                                    {\ldots}                0   
+         788195  0000000301                                    {\ldots}                0   
+         788196  0000000301                                    {\ldots}                0   
+         788197  0000000301                                    {\ldots}                0   
+         788198  0000000301                                    {\ldots}                0   
+         788199  0000000301                                    {\ldots}                0   
+         788200  0000000301                                    {\ldots}                0   
+         788201  0000000301                                    {\ldots}                0   
+         788202  0000000301                                    {\ldots}                0   
+         788203  0000000301                                    {\ldots}                0   
+         788204  0000000301                                    {\ldots}                0   
+         788205  0000000301                                    {\ldots}                0   
+         788206  0000000301                                    {\ldots}                0   
+         788207  0000000301                                    {\ldots}                0   
+         788208  0000000301                                    {\ldots}                0   
+         788209  0000000301                                    {\ldots}                0   
+         788210  0000000301                                    {\ldots}                0   
+         788211  0000000301                                    {\ldots}                0   
+         788212  0000000301                                    {\ldots}                0   
+         788213  0000000301                                    {\ldots}                0   
+         788214  0000000301                                    {\ldots}                0   
+         788215  0000000301                                    {\ldots}                0   
+         788216  0000000301                                    {\ldots}                0   
+         788217  0000000301                                    {\ldots}                0   
+         
+                 EXITSn\_hourly  
+         1                   0  
+         2                   1  
+         3                  29  
+         4                  85  
+         5                  59  
+         6                  46  
+         7                  22  
+         8                   3  
+         9                  19  
+         10                 65  
+         11                 39  
+         12                 38  
+         13                 22  
+         14                  2  
+         15                 19  
+         16                 79  
+         17                 46  
+         18                 31  
+         19                 24  
+         20                  3  
+         21                117  
+         22                279  
+         23                 97  
+         24                 79  
+         25                 31  
+         26                  3  
+         27                116  
+         28                279  
+         29                 71  
+         30                 51  
+         {\ldots}               {\ldots}  
+         788188              0  
+         788189              0  
+         788190              0  
+         788191              0  
+         788192              0  
+         788193              0  
+         788194              0  
+         788195              0  
+         788196              0  
+         788197              0  
+         788198              0  
+         788199              0  
+         788200              0  
+         788201              0  
+         788202              0  
+         788203              0  
+         788204              0  
+         788205              0  
+         788206              0  
+         788207              0  
+         788208              0  
+         788209              0  
+         788210              0  
+         788211              0  
+         788212              0  
+         788213              0  
+         788214              0  
+         788215              0  
+         788216              0  
+         788217              0  
+         
+         [785406 rows x 13 columns]
+\end{Verbatim}
+            
+    \subsubsection{\texorpdfstring{\emph{Exercise
+1.6}}{Exercise 1.6}}\label{exercise-1.6}
+
+Given an entry variable that represents time, in the format: ~~~~
+"00:00:00" (hour: minutes: seconds) ~~~~ Write a function to extract the
+hour part from the time in the entry variable And return it as an
+integer. For example: ~~~~~~~~ 1) if hour is 00, your code must return 0
+~~~~~~~~ 2) if hour is 01, your code must return 1 ~~~~~~~~ 3) if hour
+is 21, your code must return 21 ~~~~~~~~ Please return te hour as an
+integer.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{time\PYZus{}to\PYZus{}hour}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hour}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TIMEn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{df}
+         \PY{n}{time\PYZus{}to\PYZus{}hour}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:}           C/A  UNIT       SCP        STATION  LINENAME  DIVISION       DATEn  \textbackslash{}
+         1        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         2        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         3        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         4        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         5        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         6        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/27/2017   
+         7        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         8        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         9        A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         10       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         11       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         12       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/28/2017   
+         13       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         14       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         15       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         16       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         17       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         18       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/29/2017   
+         19       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         20       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         21       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         22       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         23       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         24       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/30/2017   
+         25       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         26       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         27       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         28       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         29       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         30       A002  R051  02-00-00          59 ST   NQR456W       BMT  05/31/2017   
+         {\ldots}       {\ldots}   {\ldots}       {\ldots}            {\ldots}       {\ldots}       {\ldots}         {\ldots}   
+         788188  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788189  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788190  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788191  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788192  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788193  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/19/2017   
+         788194  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788195  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788196  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788197  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788198  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788199  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/20/2017   
+         788200  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788201  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788202  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788203  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788204  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788205  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/21/2017   
+         788206  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788207  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788208  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788209  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788210  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788211  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/22/2017   
+         788212  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788213  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788214  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788215  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788216  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         788217  TRAM2  R469  00-05-01  RIT-ROOSEVELT         R       RIT  06/23/2017   
+         
+                    TIMEn    DESCn    ENTRIESn  \textbackslash{}
+         1       00:00:00  REGULAR  0006195217   
+         2       04:00:00  REGULAR  0006195240   
+         3       08:00:00  REGULAR  0006195256   
+         4       12:00:00  REGULAR  0006195346   
+         5       16:00:00  REGULAR  0006195518   
+         6       20:00:00  REGULAR  0006195765   
+         7       00:00:00  REGULAR  0006195898   
+         8       04:00:00  REGULAR  0006195914   
+         9       08:00:00  REGULAR  0006195930   
+         10      12:00:00  REGULAR  0006196024   
+         11      16:00:00  REGULAR  0006196186   
+         12      20:00:00  REGULAR  0006196446   
+         13      00:00:00  REGULAR  0006196569   
+         14      04:00:00  REGULAR  0006196587   
+         15      08:00:00  REGULAR  0006196597   
+         16      12:00:00  REGULAR  0006196666   
+         17      16:00:00  REGULAR  0006196853   
+         18      20:00:00  REGULAR  0006197107   
+         19      00:00:00  REGULAR  0006197230   
+         20      04:00:00  REGULAR  0006197238   
+         21      08:00:00  REGULAR  0006197288   
+         22      12:00:00  REGULAR  0006197470   
+         23      16:00:00  REGULAR  0006197790   
+         24      20:00:00  REGULAR  0006198624   
+         25      00:00:00  REGULAR  0006198819   
+         26      04:00:00  REGULAR  0006198834   
+         27      08:00:00  REGULAR  0006198880   
+         28      12:00:00  REGULAR  0006199053   
+         29      16:00:00  REGULAR  0006199379   
+         30      20:00:00  REGULAR  0006200200   
+         {\ldots}          {\ldots}      {\ldots}         {\ldots}   
+         788188  01:00:00  REGULAR  0000005554   
+         788189  05:00:00  REGULAR  0000005554   
+         788190  09:00:00  REGULAR  0000005554   
+         788191  13:00:00  REGULAR  0000005554   
+         788192  17:00:00  REGULAR  0000005554   
+         788193  21:00:00  REGULAR  0000005554   
+         788194  01:00:00  REGULAR  0000005554   
+         788195  05:00:00  REGULAR  0000005554   
+         788196  09:00:00  REGULAR  0000005554   
+         788197  13:00:00  REGULAR  0000005554   
+         788198  17:00:00  REGULAR  0000005554   
+         788199  21:00:00  REGULAR  0000005554   
+         788200  01:00:00  REGULAR  0000005554   
+         788201  05:00:00  REGULAR  0000005554   
+         788202  09:00:00  REGULAR  0000005554   
+         788203  13:00:00  REGULAR  0000005554   
+         788204  17:00:00  REGULAR  0000005554   
+         788205  21:00:00  REGULAR  0000005554   
+         788206  01:00:00  REGULAR  0000005554   
+         788207  05:00:00  REGULAR  0000005554   
+         788208  09:00:00  REGULAR  0000005554   
+         788209  13:00:00  REGULAR  0000005554   
+         788210  17:00:00  REGULAR  0000005554   
+         788211  21:00:00  REGULAR  0000005554   
+         788212  01:00:00  REGULAR  0000005554   
+         788213  05:00:00  REGULAR  0000005554   
+         788214  09:00:00  REGULAR  0000005554   
+         788215  13:00:00  REGULAR  0000005554   
+         788216  17:00:00  REGULAR  0000005554   
+         788217  21:00:00  REGULAR  0000005554   
+         
+                                                            EXITSn  ENTRIESn\_hourly  \textbackslash{}
+         1       0002098317                                    {\ldots}                1   
+         2       0002098318                                    {\ldots}               23   
+         3       0002098347                                    {\ldots}               16   
+         4       0002098432                                    {\ldots}               90   
+         5       0002098491                                    {\ldots}              172   
+         6       0002098537                                    {\ldots}              247   
+         7       0002098559                                    {\ldots}              133   
+         8       0002098562                                    {\ldots}               16   
+         9       0002098581                                    {\ldots}               16   
+         10      0002098646                                    {\ldots}               94   
+         11      0002098685                                    {\ldots}              162   
+         12      0002098723                                    {\ldots}              260   
+         13      0002098745                                    {\ldots}              123   
+         14      0002098747                                    {\ldots}               18   
+         15      0002098766                                    {\ldots}               10   
+         16      0002098845                                    {\ldots}               69   
+         17      0002098891                                    {\ldots}              187   
+         18      0002098922                                    {\ldots}              254   
+         19      0002098946                                    {\ldots}              123   
+         20      0002098949                                    {\ldots}                8   
+         21      0002099066                                    {\ldots}               50   
+         22      0002099345                                    {\ldots}              182   
+         23      0002099442                                    {\ldots}              320   
+         24      0002099521                                    {\ldots}              834   
+         25      0002099552                                    {\ldots}              195   
+         26      0002099555                                    {\ldots}               15   
+         27      0002099671                                    {\ldots}               46   
+         28      0002099950                                    {\ldots}              173   
+         29      0002100021                                    {\ldots}              326   
+         30      0002100072                                    {\ldots}              821   
+         {\ldots}                                                   {\ldots}              {\ldots}   
+         788188  0000000301                                    {\ldots}                0   
+         788189  0000000301                                    {\ldots}                0   
+         788190  0000000301                                    {\ldots}                0   
+         788191  0000000301                                    {\ldots}                0   
+         788192  0000000301                                    {\ldots}                0   
+         788193  0000000301                                    {\ldots}                0   
+         788194  0000000301                                    {\ldots}                0   
+         788195  0000000301                                    {\ldots}                0   
+         788196  0000000301                                    {\ldots}                0   
+         788197  0000000301                                    {\ldots}                0   
+         788198  0000000301                                    {\ldots}                0   
+         788199  0000000301                                    {\ldots}                0   
+         788200  0000000301                                    {\ldots}                0   
+         788201  0000000301                                    {\ldots}                0   
+         788202  0000000301                                    {\ldots}                0   
+         788203  0000000301                                    {\ldots}                0   
+         788204  0000000301                                    {\ldots}                0   
+         788205  0000000301                                    {\ldots}                0   
+         788206  0000000301                                    {\ldots}                0   
+         788207  0000000301                                    {\ldots}                0   
+         788208  0000000301                                    {\ldots}                0   
+         788209  0000000301                                    {\ldots}                0   
+         788210  0000000301                                    {\ldots}                0   
+         788211  0000000301                                    {\ldots}                0   
+         788212  0000000301                                    {\ldots}                0   
+         788213  0000000301                                    {\ldots}                0   
+         788214  0000000301                                    {\ldots}                0   
+         788215  0000000301                                    {\ldots}                0   
+         788216  0000000301                                    {\ldots}                0   
+         788217  0000000301                                    {\ldots}                0   
+         
+                 EXITSn\_hourly  hour  
+         1                   0     0  
+         2                   1     4  
+         3                  29     8  
+         4                  85    12  
+         5                  59    16  
+         6                  46    20  
+         7                  22     0  
+         8                   3     4  
+         9                  19     8  
+         10                 65    12  
+         11                 39    16  
+         12                 38    20  
+         13                 22     0  
+         14                  2     4  
+         15                 19     8  
+         16                 79    12  
+         17                 46    16  
+         18                 31    20  
+         19                 24     0  
+         20                  3     4  
+         21                117     8  
+         22                279    12  
+         23                 97    16  
+         24                 79    20  
+         25                 31     0  
+         26                  3     4  
+         27                116     8  
+         28                279    12  
+         29                 71    16  
+         30                 51    20  
+         {\ldots}               {\ldots}   {\ldots}  
+         788188              0     1  
+         788189              0     5  
+         788190              0     9  
+         788191              0    13  
+         788192              0    17  
+         788193              0    21  
+         788194              0     1  
+         788195              0     5  
+         788196              0     9  
+         788197              0    13  
+         788198              0    17  
+         788199              0    21  
+         788200              0     1  
+         788201              0     5  
+         788202              0     9  
+         788203              0    13  
+         788204              0    17  
+         788205              0    21  
+         788206              0     1  
+         788207              0     5  
+         788208              0     9  
+         788209              0    13  
+         788210              0    17  
+         788211              0    21  
+         788212              0     1  
+         788213              0     5  
+         788214              0     9  
+         788215              0    13  
+         788216              0    17  
+         788217              0    21  
+         
+         [785406 rows x 14 columns]
+\end{Verbatim}
+            
+    \subsection{Exercise 2 - Data
+Analysis}\label{exercise-2---data-analysis}
+
+\subsubsection{\texorpdfstring{\emph{Exercise
+2.1}}{Exercise 2.1}}\label{exercise-2.1}
+
+To understand the relationship between the Subway activity and the
+weather, please complete the data from the file already downloaded with
+the weather data. We provided you with the file containing NYC weather
+data and made it available with the Support Material. You can access it
+through the link:
+https://s3.amazonaws.com/content.udacity-data.com/courses/ud359/turnstile\_data\_master\_with\_weather.csv
+
+Now that we have our data in a csv file, write Python code that reads
+this file and saves it into a Pandas Dataframe.
+
+Tip:
+
+Use the command below to read the file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pd.read_csv(}\StringTok{'output_list.txt'}\NormalTok{, sep}\OperatorTok{=}\StringTok{","}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{n}{filename} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dataset/turnstile\PYZus{}data\PYZus{}master\PYZus{}with\PYZus{}weather.csv}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filename}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}    Unnamed: 0  UNIT       DATEn     TIMEn  Hour    DESCn  ENTRIESn\_hourly  \textbackslash{}
+         0           0  R001  2011-05-01  01:00:00     1  REGULAR              0.0   
+         1           1  R001  2011-05-01  05:00:00     5  REGULAR            217.0   
+         2           2  R001  2011-05-01  09:00:00     9  REGULAR            890.0   
+         3           3  R001  2011-05-01  13:00:00    13  REGULAR           2451.0   
+         4           4  R001  2011-05-01  17:00:00    17  REGULAR           4400.0   
+         
+            EXITSn\_hourly  maxpressurei  maxdewpti   {\ldots}     meandewpti  meanpressurei  \textbackslash{}
+         0            0.0         30.31       42.0   {\ldots}           39.0          30.27   
+         1          553.0         30.31       42.0   {\ldots}           39.0          30.27   
+         2         1262.0         30.31       42.0   {\ldots}           39.0          30.27   
+         3         3708.0         30.31       42.0   {\ldots}           39.0          30.27   
+         4         2501.0         30.31       42.0   {\ldots}           39.0          30.27   
+         
+            fog  rain  meanwindspdi  mintempi  meantempi  maxtempi  precipi  thunder  
+         0  0.0   0.0           5.0      50.0       60.0      69.0      0.0      0.0  
+         1  0.0   0.0           5.0      50.0       60.0      69.0      0.0      0.0  
+         2  0.0   0.0           5.0      50.0       60.0      69.0      0.0      0.0  
+         3  0.0   0.0           5.0      50.0       60.0      69.0      0.0      0.0  
+         4  0.0   0.0           5.0      50.0       60.0      69.0      0.0      0.0  
+         
+         [5 rows x 22 columns]
+\end{Verbatim}
+            
+    \subsubsection{\texorpdfstring{\emph{Exercise
+2.2}}{Exercise 2.2}}\label{exercise-2.2}
+
+Now, create a function that calculates the number of rainy days. For
+this, return the count of the number of days where the column
+\emph{"rain"} is equal to 1.
+
+Tip: You might think that interpreting numbers as integers or floats
+might not ~~~~ work at first. To handle this issue, it might be useful
+to convert ~~~~ these numbers into integers. You can do this by writting
+cast (column as integer). ~~~~ So, for example, if we want to launch the
+column maxtempi as an integer, we have to ~~~~ write something like cast
+(maxtempi as integer) = 76, instead of just ~~~~ where maxtempi = 76.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{count}\PY{o}{=}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{1.0}\PY{p}{)}
+         \PY{n}{count}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 44104
+\end{Verbatim}
+            
+    \subsubsection{\texorpdfstring{\emph{Exercise
+2.3}}{Exercise 2.3}}\label{exercise-2.3}
+
+Calculate if the day was cloudy or not (0 or 1) and the maximum
+temperature for fog (i.e. the maximum temperature ~~~~ for cloudy days).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{maximum\PYZus{}temp\PYZus{}for\PYZus{}coludy}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{maxtempi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{maximum\PYZus{}temp\PYZus{}for\PYZus{}coludy}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} 81.0
+\end{Verbatim}
+            
+    \subsubsection{*Exercise 2.4}\label{exercise-2.4}
+
+Now, calculate the mean for 'meantempi' for the days that are Saturdays
+or Sundays (weekend):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kn}{import} \PY{n+nn}{datetime}
+         \PY{k}{def} \PY{n+nf}{weekday}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{dataAsString}\PY{o}{=}\PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{return} \PY{n+nb}{int}\PY{p}{(}\PY{n}{dataAsString}\PY{p}{)}
+         \PY{n}{df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filename}\PY{p}{)}   
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DATEn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{weekday}\PY{p}{)}
+         \PY{n}{mean\PYZus{}temp\PYZus{}weekends}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{|}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{meantempi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mean\PYZus{}temp\PYZus{}weekends}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 65.10066685403307
+\end{Verbatim}
+            
+    \subsubsection{*Exercise 2.5}\label{exercise-2.5}
+
+Calculate the mean of the minimum temperature 'mintempi' for the days
+when the minimum temperature was greater that 55 degrees:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filename}\PY{p}{)}
+         \PY{n}{avg\PYZus{}min\PYZus{}temp\PYZus{}rainy} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mintempi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mf}{55.0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mintempi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{avg\PYZus{}min\PYZus{}temp\PYZus{}rainy}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 63.2699012987013
+\end{Verbatim}
+            
+    \subsubsection{*Exercise 2.6}\label{exercise-2.6}
+
+Before you make any analysis, it might be useful to look at the data we
+want to analyse. More specifically, we will evaluate the entries by hour
+in our data from the NYC Subway to determine the data distribution. This
+data is stored in the column {[}'ENTRIESn\_hourly'{]}. ~~~~ Draw two
+histogramns in the same axis, to show the entries when it's raining vs
+when it's not. Below, you will find an example of how to draw
+histogramns with Pandas and Matplotlib: ~~~~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Turnstile_weather [}\StringTok{'column_to_graph'}\NormalTok{]. Hist ()}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{patches} \PY{k}{as} \PY{n+nn}{mpatches}
+         \PY{k+kn}{import} \PY{n+nn}{pandas}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ENTRIESn\PYZus{}hourly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ENTRIESn\PYZus{}hourly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{number of entries}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{entries vs total\PYZus{}count of that entry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{red\PYZus{}patch}\PY{o}{=}\PY{n}{mpatches}\PY{o}{.}\PY{n}{Patch}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rainy day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{green\PYZus{}patch}\PY{o}{=}\PY{n}{mpatches}\PY{o}{.}\PY{n}{Patch}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unrainy day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{handles}\PY{o}{=}\PY{p}{[}\PY{n}{green\PYZus{}patch}\PY{p}{,}\PY{n}{red\PYZus{}patch}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <matplotlib.legend.Legend at 0x1625c574860>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{*Exercise 2.7}\label{exercise-2.7}
+
+The data you just plotted is in what kind of distribution? Is there a
+difference in distribution between rainy and non-rainy days?
+
+    ** Answer **: In both cases a non-normal distribution is visualized,
+whose highest concentration of observed data (fashion) is concentrated
+at the left end of the graph, thus characterizing a positive
+(asymmetric) slope distribution. (i.e) There is a clear difference that
+on rainy day people are using subway less than that of a unrainy day.
+
+    \subsubsection{*Exercise 2.8}\label{exercise-2.8}
+
+Build a function that returns:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The mean of entries when it's raining
+\item
+  The mean of entries when it's not raining
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{mean\PYZus{}of\PYZus{}raining} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ENTRIESn\PYZus{}hourly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mean\PYZus{}of\PYZus{}raining}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} 1105.4463767458733
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{mean\PYZus{}of\PYZus{}notraining} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ENTRIESn\PYZus{}hourly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mean\PYZus{}of\PYZus{}notraining}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 1090.278780151855
+\end{Verbatim}
+            
+    Answer to the following questions according to your functions' exits:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is the mean of entries when it's raining?
+\item
+  What is the mean of entries when it's not raining?
+\end{enumerate}
+
+    ** Answer **:
+
+The mean of entries when it's raining : 1105.446
+
+The mean of entries when it's not raining : 1090.2787
+
+    \subsection{Exercise 3 - Map Reduce}\label{exercise-3---map-reduce}
+
+\subsubsection{\texorpdfstring{\emph{Exercise
+3.1}}{Exercise 3.1}}\label{exercise-3.1}
+
+The entry for this exercise is the same file from the previous session
+(Exercise 2). You can download the file from this link:
+
+https://s3.amazonaws.com/content.udacity-data.com/courses/ud359/turnstile\_data\_master\_with\_weather.csv
+
+Now, we will create a mapper. For each entry line, the mapper exit must
+PRINT (not return) UNIT as a key, and the number of ENTRIESn\_hourly as
+the value. Separate the key and the value with a tab. For example: 'R002
+~t105105.0'
+
+Export your mapper into a file named mapper\_result.txt and send it with
+your submission. The code for exporting your mapper is already written
+in the code bellow.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{k}{def} \PY{n+nf}{mapper}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{sys}\PY{o}{.}\PY{n}{stdin}\PY{p}{:}
+                 \PY{n}{data} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{7}\PY{p}{:}
+                     \PY{n}{unit} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                     \PY{n}{entries} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}unit\PYZcb{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}entries\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{sys}\PY{o}{.}\PY{n}{stdin} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dataset/turnstile\PYZus{}data\PYZus{}master\PYZus{}with\PYZus{}weather.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sys}\PY{o}{.}\PY{n}{stdout} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dataset/mapper\PYZus{}result.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{mapper}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{\texorpdfstring{\emph{Exercise
+3.2}}{Exercise 3.2}}\label{exercise-3.2}
+
+Now, create the reducer. Given the mapper result from the previous
+exercise, the reducer must print (not return) one line per UNIT, with
+the total number of ENTRIESn\_hourly during May (which is our data
+duration), separated by a tab. An example of exit line from the reducer
+may look like this: 'R001 ~t500625.0'
+
+You can assume that the entry for the reducer is ordered in a way that
+all lines corresponding to a particular unit are grouped. However, the
+reducer exit will have repetition, as there are stores that appear in
+different files' locations.
+
+Export your reducer into a file named reducer\_result.txt and send it
+with your submission.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{def} \PY{n+nf}{reducer}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{entriesTotal} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{oldKey} \PY{o}{=} \PY{k+kc}{None}
+             \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{sys}\PY{o}{.}\PY{n}{stdin}\PY{p}{:}
+                 \PY{n}{data\PYZus{}mapped} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}mapped}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{2}\PY{p}{:}
+                     \PY{k}{continue}
+                 \PY{n}{thisKey}\PY{p}{,} \PY{n}{thisEntry} \PY{o}{=} \PY{n}{data\PYZus{}mapped}
+                 \PY{k}{try}\PY{p}{:}
+                     \PY{n}{thisEntry\PYZus{}to\PYZus{}f} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{thisEntry}\PY{p}{)}
+                     \PY{k}{if} \PY{n}{oldKey} \PY{o+ow}{and} \PY{n}{oldKey} \PY{o}{!=} \PY{n}{thisKey}\PY{p}{:}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}oldKey\PYZcb{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}entriesTotal\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                         \PY{n}{oldKey} \PY{o}{=} \PY{n}{thisKey}
+                         \PY{n}{entriesTotal} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{n}{oldKey} \PY{o}{=} \PY{n}{thisKey}
+                     \PY{n}{entriesTotal} \PY{o}{+}\PY{o}{=} \PY{n}{thisEntry\PYZus{}to\PYZus{}f}
+                 \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:}
+                     \PY{k}{pass}
+         \PY{n}{sys}\PY{o}{.}\PY{n}{stdin} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dataset/mapper\PYZus{}result.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sys}\PY{o}{.}\PY{n}{stdout} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dataset/reducer\PYZus{}result.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{reducer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
